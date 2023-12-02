@@ -1,2 +1,7 @@
-# aoc-2023
-my solutions for advent of code 2023
+# Advent of Code 2023
+
+> my solutions for aoc 2023
+
+## License
+
+[MIT](LICENSE)
