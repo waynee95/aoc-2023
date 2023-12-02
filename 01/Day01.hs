@@ -8,25 +8,18 @@ calibrationValue xs = head xs * 10 + last xs
 
 digitify :: String -> Maybe Int
 digitify s
-    | "one" `isPrefixOf` s = Just 1
-    | "1" `isPrefixOf` s = Just 1
-    | "two" `isPrefixOf` s = Just 2
-    | "2" `isPrefixOf` s = Just 2
-    | "three" `isPrefixOf` s = Just 3
-    | "3" `isPrefixOf` s = Just 3
-    | "four" `isPrefixOf` s = Just 4
-    | "4" `isPrefixOf` s = Just 4
-    | "five" `isPrefixOf` s = Just 5
-    | "5" `isPrefixOf` s = Just 5
-    | "six" `isPrefixOf` s = Just 6
-    | "6" `isPrefixOf` s = Just 6
-    | "seven" `isPrefixOf` s = Just 7
-    | "7" `isPrefixOf` s = Just 7
-    | "eight" `isPrefixOf` s = Just 8
-    | "8" `isPrefixOf` s = Just 8
-    | "nine" `isPrefixOf` s = Just 9
-    | "9" `isPrefixOf` s = Just 9
+    | ("1", "one") `eitherIsPrefixOf` s = Just 1
+    | ("2", "two") `eitherIsPrefixOf` s = Just 2
+    | ("3", "three") `eitherIsPrefixOf` s = Just 3
+    | ("4", "four") `eitherIsPrefixOf` s = Just 4
+    | ("5", "five") `eitherIsPrefixOf` s = Just 5
+    | ("6", "six") `eitherIsPrefixOf` s = Just 6
+    | ("7", "seven") `eitherIsPrefixOf` s = Just 7
+    | ("8", "eight") `eitherIsPrefixOf` s = Just 8
+    | ("9", "nine") `eitherIsPrefixOf` s = Just 9
     | otherwise = Nothing
+  where
+    eitherIsPrefixOf (s1, s2) s = s1 `isPrefixOf` s || s2 `isPrefixOf` s
 
 part1 :: [String] -> Int
 part1 = sum . map (calibrationValue . map digitToInt . filter isDigit)
