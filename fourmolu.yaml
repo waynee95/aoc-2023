@@ -1,0 +1,6 @@
+indentation: 4
+function-arrows: leading
+comma-style: leading
+record-brace-space: true
+newlines-between-decls: 1
+respectful: true
