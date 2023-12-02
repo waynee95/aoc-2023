@@ -77,9 +77,6 @@ parseGame = do
 
 parseInput = sepBy parseGame newline
 
-config :: Draw
-config = Draw {r = 12, g = 13, b = 14}
-
 combine :: Game [Draw] -> Game Draw
 combine (Game n draws) =
     Game n $
@@ -89,19 +86,17 @@ combine (Game n draws) =
             , b = maximum $ map (.b) draws
             }
 
-score :: Game Draw -> Maybe Int
-score (Game n d@Draw {r, g, b})
-    | d <= config = Just n
-    | otherwise = Nothing
-
 part1 :: Input -> Int
 part1 = sum . mapMaybe (score . combine)
-
-power :: Game Draw -> Int
-power (Game n Draw {r, g, b}) = r * g * b
+    where
+        config = Draw {r = 12, g = 13, b = 14}
+        score (Game n d) | d <= config = Just n
+                         | otherwise = Nothing
 
 part2 :: Input -> Int
 part2 = sum . map (power . combine)
+    where
+        power (Game _ Draw {r, g, b}) = r * g * b
 
 main :: IO ()
 main = do
